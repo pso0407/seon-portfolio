@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+                <style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f5;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* Navigation */
+header {
+    position: sticky;
+    top: 0;
+    background-color: #f7f7f5;
+    border-bottom: 1px solid #ddd;
+    z-index: 100;
+}
+
+nav {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h2 {
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #222;
+}
+
+.nav-links a:hover {
+    color: #5f7355;
+}
+
+
+/* Home */
+.home {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hello {
+    color: #5f7355;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.home h1 {
+    font-size: 70px;
+    margin: 10px 0;
+}
+
+.subtitle {
+    font-size: 22px;
+    color: #666;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.button {
+    padding: 12px 25px;
+    border: 1px solid #5f7355;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #5f7355;
+}
+
+.button:hover {
+    background-color: #5f7355;
+    color: white;
+}
+
+
+/* Sections */
+section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 100px 20px;
+}
+
+.section-title {
+    font-size: 35px;
+    margin-bottom: 35px;
+}
+
+
+/* About */
+.card {
+    background-color: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.card p {
+    margin-bottom: 8px;
+}
+
+.card strong {
+    color: #5f7355;
+}
+
+
+/* Skills */
+.skills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.skill {
+    background-color: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+
+
+
+
+
+/* Interests */
+.interests {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.interests div {
+    background-color: #5f7355;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+
+/* Contact */
+.contact-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.contact-card a {
+    color: #5f7355;
+    text-decoration: none;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    border-top: 1px solid #ddd;
+}
+
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .home h1 {
+        font-size: 45px;
+    }
+
+    .nav-links {
+        gap: 10px;
+        font-size: 14px;
+    }
+
+    .skills,
+    .interests {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}</style>
+            </head>
+            <body>
+                <script>(function installLiveweaveConsoleBridge() {
+        if (window.__liveweaveConsoleBridge) return;
+        window.__liveweaveConsoleBridge = true;
+
+        function format(value) {
+            if (typeof value === 'string') return value;
+            if (typeof value === 'undefined') return 'undefined';
+            if (typeof value === 'function') return value.toString();
+            if (value instanceof Error) return value.name + ': ' + value.message;
+            if (value instanceof Element) return value.outerHTML;
+            try {
+                var seen = [];
+                return JSON.stringify(value, function(key, item) {
+                    if (typeof item === 'object' && item !== null) {
+                        if (seen.indexOf(item) !== -1) return '[Circular]';
+                        seen.push(item);
+                    }
+                    return item;
+                }, 2);
+            } catch (err) {
+                return String(value);
+            }
+        }
+
+        function send(type, values, id) {
+            parent.postMessage({
+                source: 'liveweave-preview-console',
+                type: type,
+                id: id || '',
+                values: (values || []).map(format)
+            }, '*');
+        }
+
+        ['log', 'info', 'warn', 'error', 'debug'].forEach(function(level) {
+            var original = console[level];
+            console[level] = function() {
+                var args = Array.prototype.slice.call(arguments);
+                send(level === 'log' || level === 'debug' ? 'log' : level, args);
+                if (original) original.apply(console, args);
+            };
+        });
+
+        window.addEventListener('error', function(event) {
+            send('error', [event.message + (event.lineno ? ' (line ' + event.lineno + ')' : '')]);
+        });
+        window.addEventListener('unhandledrejection', function(event) {
+            send('error', ['Unhandled promise rejection:', event.reason]);
+        });
+        window.addEventListener('message', function(event) {
+            var message = event.data || {};
+            if (event.source !== parent || message.source !== 'liveweave-parent-console' || message.type !== 'evaluate') return;
+            try {
+                var result = (0, eval)(message.code);
+                Promise.resolve(result).then(function(value) {
+                    send('result', [value], message.id);
+                }, function(error) {
+                    send('error', [error], message.id);
+                });
+            } catch (error) {
+                send('error', [error], message.id);
+            }
+        });
+        send('ready', []);
+    })();</script>
+                <script>(function installPreviewLinkGuard() {
+        var noticeTimer;
+
+        function showNotice(message) {
+            var notice = document.getElementById('lw-preview-link-notice');
+            if (!notice) {
+                notice = document.createElement('div');
+                notice.id = 'lw-preview-link-notice';
+                notice.setAttribute('role', 'status');
+                notice.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:2147483647;max-width:calc(100% - 24px);padding:10px 14px;border-radius:9px;background:#17212d;color:#fff;font:13px/1.4 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25);pointer-events:none;';
+                document.body.appendChild(notice);
+            }
+            notice.textContent = message;
+            notice.hidden = false;
+            clearTimeout(noticeTimer);
+            noticeTimer = setTimeout(function() { notice.hidden = true; }, 3500);
+        }
+
+        document.addEventListener('click', function(event) {
+            var link = event.target.closest && event.target.closest('a[href]');
+            if (!link || event.defaultPrevented) return;
+
+            var href = (link.getAttribute('href') || '').trim();
+            if (href.charAt(0) === '#') {
+                event.preventDefault();
+                var fragment = href.slice(1);
+                if (!fragment) {
+                    window.scrollTo(0, 0);
+                    return;
+                }
+                try { fragment = decodeURIComponent(fragment); } catch (error) {}
+                var target = document.getElementById(fragment) || document.getElementsByName(fragment)[0];
+                if (target) target.scrollIntoView();
+                return;
+            }
+
+            if (/^(https?:)?\/\//i.test(href)) {
+                event.preventDefault();
+                window.open(href, '_blank', 'noopener,noreferrer');
+                return;
+            }
+
+            if (/^(mailto:|tel:)/i.test(href)) return;
+
+            event.preventDefault();
+            showNotice('This page cannot be opened in the preview.');
+        }, true);
+    })();</script>
+                
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park Se On - Personal Page</title>
+    <link rel="stylesheet" href="style.css">
+
+
+
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <h2>SE ON</h2>
+            <div class="nav-links">
+                <a href="#about">About Me</a>
+                <a href="#skills">Skills</a>
+                <a href="#interests">Interests</a>
+                <a href="#goals">Goals</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Home -->
+    <section id="home" class="home">
+        <p class="hello">HELLO, I'M</p>
+        <h1>Park Se On</h1>
+        <p class="subtitle">Computer Engineering Student</p>
+
+        <div class="buttons">
+            <a href="#about" class="button">About Me</a>
+        </div>
+    </section>
+
+
+    <!-- About Me -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+
+        <div class="card">
+            <p><strong>University</strong></p>
+            <p>Hankuk University of Foreign Studies</p>
+
+            <p><strong>Major</strong></p>
+            <p>Computer Engineering</p>
+
+            <p><strong>Interests</strong></p>
+            <p>Technology, Environment, E-commerce</p>
+        </div>
+    </section>
+
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+
+        <div class="skills">
+            <div class="skill">HTML / CSS</div>
+            <div class="skill">Python</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">GitHub</div>
+        </div>
+    </section>
+
+
+    <!-- Interests -->
+    <section id="interests">
+        <h2 class="section-title">Interests</h2>
+
+        <div class="interests">
+            <div>Technology</div>
+            <div>Environment</div>
+            <div>E-commerce</div>
+            <div>Languages</div>
+        </div>
+    </section>
+    <!-- Goals -->
+<section id="goals">
+    <h2 class="section-title">Goals</h2>
+
+    <div class="card">
+        <p>Improve my programming skills</p>
+        <p>Learn more about web development</p>
+        <p>Explore technology and environmental issues</p>
+    </div>
+</section>
+
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+
+        <div class="contact-card">
+            <p>
+                GitHub :
+                <a href="https://github.com/onioni47" target="_blank">onioni47</a>
+            </p>
+
+            <p>
+                Email :
+                <a href="mailto:202502030@hufs.ac.kr">
+                    202502030@hufs.ac.kr
+                </a>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Park Se On. All rights reserved.</p>
+    </footer>
+
+
+
+                <script>// Image upload handler
+document.getElementById('imageUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profileImage').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});</script>
+            
+        
+    </body>
